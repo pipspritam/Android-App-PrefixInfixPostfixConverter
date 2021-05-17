@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Prefix-Infix-Postfix Converter</string>
+    <string name="infix_to_other_button">Infix To Prefix/Postfix</string>
+    <string name="prefix_to_other_button">Prefix To Infix/Postfix</string>
+    <string name="postfix_to_other_button">Postfix To Prefix/Infix</string>
+    <string name="copy_right">© 2020 21 PritamPips All Rights Reserved</string>
+    <string name="alert_title">Do you want to exit?</string>
+    <string name="alert_massage">See you soon :)</string>
+    <string name="prefix">Prefix Expression</string>
+    <string name="postfix">Postfix Expression</string>
+    <string name="infix">Infix Expression</string>
+    <string name="infix_input">Enter Infix String</string>
+    <string name="prefix_input">Enter Prefix String</string>
+    <string name="postfix_input">Enter Postfix String</string>
+    <string name="convert_button">Convert</string>
+    <string name="reset_button">Reset</string>
+    <string name="dot_line">...........................</string>
+    <string name="invalid_input">Oops!! Invalid Input Expression!!</string>
+    <string name="step_by_step_solution">Step By Step Solution</string>
+    <string name="infix_to_postfix_step_by_step_solution">Infix To Postfix Step By Step Solution</string>
+    <string name="infix_to_prefix_step_by_step_solution">Infix To Prefix Step By Step Solution</string>
+    <string name="postfix_to_infix_step_by_step_solution">Postfix To Infix Step By Step Solution</string>
+    <string name="postfix_to_prefix_step_by_step_solution">Postfix To Prefix Step By Step Solution</string>
+    <string name="prefix_to_infix_step_by_step_solution">Prefix To Infix Step By Step Solution</string>
+    <string name="prefix_to_postfix_step_by_step_solution">Prefix To Postfix Step By Step Solution</string>
+</resources>
