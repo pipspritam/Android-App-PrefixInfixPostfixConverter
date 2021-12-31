@@ -36,7 +36,7 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
     {
         if (C == '-' || C == '+')
             return 1;
-        else if (C == '*' || C == '/')
+        else if (C == '*' || C == '/' || C == '%')
             return 2;
         else if (C == '^' || C=='$')
             return 3;

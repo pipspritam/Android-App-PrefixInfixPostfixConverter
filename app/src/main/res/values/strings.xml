@@ -3,7 +3,7 @@
     <string name="infix_to_other_button">Infix To Prefix/Postfix</string>
     <string name="prefix_to_other_button">Prefix To Infix/Postfix</string>
     <string name="postfix_to_other_button">Postfix To Prefix/Infix</string>
-    <string name="copy_right">© 2020 21 PritamPips All Rights Reserved</string>
+    <string name="copy_right">© 2020 22 PritamPips All Rights Reserved</string>
     <string name="alert_title">Do you want to exit?</string>
     <string name="alert_massage">See you soon :)</string>
     <string name="prefix">Prefix Expression</string>
