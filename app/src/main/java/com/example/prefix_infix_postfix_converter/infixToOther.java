@@ -38,6 +38,7 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
                 return 1;
             case '*':
             case '/':
+            case '%':
                 return 2;
             case '^':
             case '$':

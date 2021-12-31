@@ -114,6 +114,7 @@ public class step_by_step_solution_infix_to_prefix extends AppCompatActivity {
                 return 1;
             case '*':
             case '/':
+            case '%':
                 return 2;
             case '^':
             case '$':

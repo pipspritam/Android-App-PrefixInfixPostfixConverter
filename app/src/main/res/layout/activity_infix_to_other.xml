@@ -45,7 +45,7 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="15dp"
                     android:autofillHints="no"
-                    android:digits="0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm()+-*/^$"
+                    android:digits="0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm()+-*/^$%"
                     android:gravity="center_horizontal"
                     android:hint="@string/infix_input"
                     android:inputType="text"

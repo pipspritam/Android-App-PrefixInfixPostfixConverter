@@ -1,11 +1,12 @@
 package com.example.prefix_infix_postfix_converter;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import hotchemi.android.rate.AppRate;
 
@@ -53,18 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alertDialogbuilder.setTitle(R.string.alert_title);
         alertDialogbuilder.setMessage(R.string.alert_massage);
         alertDialogbuilder.setCancelable(false);
-        alertDialogbuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        alertDialogbuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        alertDialogbuilder.setPositiveButton("Yes", (dialog, which) -> finish());
+        alertDialogbuilder.setNegativeButton("No", (dialog, which) -> dialog.cancel());
         AlertDialog alertDialog = alertDialogbuilder.create();
         alertDialog.show();
     }
