@@ -96,18 +96,19 @@
                     android:textColor="#ffffff"
                     android:padding="5dp"
                     android:layout_marginBottom="15dp"/>
+
                 <TextView
                     android:id="@+id/prefix_output"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/dot_line"
-                    android:textSize="25sp"
-                    android:textIsSelectable="true"
-                    android:textStyle="bold"
-                    android:textColor="#ffffff"
-                    android:padding="5dp"
                     android:layout_marginBottom="15dp"
-                    />
+                    android:padding="5dp"
+                    android:text="@string/dot_line"
+                    android:textColor="#ffffff"
+                    android:textIsSelectable="true"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

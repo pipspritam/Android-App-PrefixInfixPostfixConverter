@@ -28,8 +28,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,18 +44,18 @@
                     android:id="@+id/prefix_input"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:textColorHint="#ffffff"
+                    android:textColor="#ffffff"
                     android:hint="@string/prefix_input"
                     android:gravity="center_horizontal"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
                     android:textCursorDrawable="@null"
+                    android:inputType="text"
                     android:padding="5dp"
                     android:layout_marginBottom="15dp"
-                    android:inputType="text"
                     android:digits="0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm()+-*/^$%"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:autofillHints="" />
+                    android:autofillHints="no" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,18 +97,19 @@
                     android:textStyle="bold"
                     android:padding="5dp"
                     android:layout_marginBottom="15dp"/>
+
                 <TextView
                     android:id="@+id/infix_output"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:padding="5dp"
                     android:text="@string/dot_line"
+                    android:textColor="#ffffff"
                     android:textIsSelectable="true"
                     android:textSize="25sp"
                     android:textStyle="bold"
-                    android:textColor="#ffffff"
-                    android:padding="5dp"
-                    android:layout_marginBottom="15dp"
-                    />
+                    tools:ignore="DuplicateSpeakableTextCheck" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

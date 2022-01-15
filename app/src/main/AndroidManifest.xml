@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.prefix_infix_postfix_converter">
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,12 +18,14 @@
         <activity android:name=".step_by_step_solution_infix_to_prefix" />
         <activity android:name=".step_by_step_solution_postfix_to_infix" />
         <activity android:name=".step_by_step_solution_infix_to_postfix" />
-        <activity android:name=".postfixToOther" />
+        <activity android:name=".postfixToOther"
+            android:exported="true"/>
         <activity android:name=".infixToOther" />
         <activity android:name=".prefixToOther" />
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/splashScreen">
+            android:theme="@style/splashScreen"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,5 +37,10 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7769405161583944~1507315374"/>
     </application>
 </manifest>

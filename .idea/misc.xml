@@ -10,6 +10,7 @@
         <entry key="..\:/Users/prita/AndroidStudioProjects/PrefixInfixPostfixConverter/app/src/main/res/layout/activity_infix_to_other.xml" value="0.25" />
         <entry key="..\:/Users/prita/AndroidStudioProjects/PrefixInfixPostfixConverter/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/prita/AndroidStudioProjects/PrefixInfixPostfixConverter/app/src/main/res/layout/activity_postfix_to_other.xml" value="0.25" />
+        <entry key="..\:/Users/prita/AndroidStudioProjects/PrefixInfixPostfixConverter/app/src/main/res/layout/activity_prefix_to_other.xml" value="0.19722222222222222" />
         <entry key="..\:/Users/prita/AndroidStudioProjects/PrefixInfixPostfixConverter/app/src/main/res/layout/activity_step_by_step_solution_infix_to_postfix.xml" value="0.25" />
         <entry key="..\:/Users/prita/AndroidStudioProjects/PrefixInfixPostfixConverter/app/src/main/res/layout/activity_step_by_step_solution_infix_to_prefix.xml" value="0.25" />
         <entry key="..\:/Users/prita/AndroidStudioProjects/PrefixInfixPostfixConverter/app/src/main/res/layout/activity_step_by_step_solution_postfix_to_infix.xml" value="0.25" />
@@ -19,7 +20,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
