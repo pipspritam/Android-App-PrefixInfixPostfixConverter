@@ -96,6 +96,7 @@
                     android:textColor="#ffffff"
                     android:textSize="25sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/prefix_output"
                     android:layout_width="wrap_content"
@@ -106,7 +107,8 @@
                     android:textColor="#ffffff"
                     android:textIsSelectable="true"
                     android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
                 <Button
                     android:id="@+id/prefix_sbss"
                     android:layout_width="wrap_content"

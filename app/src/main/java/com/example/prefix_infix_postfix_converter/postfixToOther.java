@@ -1,6 +1,5 @@
 package com.example.prefix_infix_postfix_converter;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,12 +8,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+
 import java.util.Stack;
 
 public class postfixToOther extends AppCompatActivity implements View.OnClickListener {
     private EditText editText_postfix_input;
     private TextView textView_infix_output, textView_prefix_output;
     private Button sbss_infix, sbss_prefix;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +42,13 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
         reset.setOnClickListener(this);
         sbss_infix.setOnClickListener(this);
         sbss_prefix.setOnClickListener(this);
+
+        MobileAds.initialize(this, initializationStatus -> {
+        });
+        setAds();
+
     }
+
     static int getPriority(char C)
     {
         if (C == '-' || C == '+')
@@ -42,6 +59,7 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
             return 3;
         return 0;
     }
+
     @Override
     public void onClick(View v) {
         try {
@@ -138,16 +156,53 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
             }
             if (v.getId()==R.id.infix_sbss)
             {
-                String postfix_input_exp = editText_postfix_input.getText().toString();
-                Intent intent_sbss = new Intent(postfixToOther.this, step_by_step_solution_postfix_to_infix.class);
-                intent_sbss.putExtra("tag",postfix_input_exp);
-                startActivity(intent_sbss);
+                if(mInterstitialAd!=null) {
+                    mInterstitialAd.show(postfixToOther.this);
+                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            super.onAdDismissedFullScreenContent();
+                            String postfix_input_exp = editText_postfix_input.getText().toString();
+                            Intent intent_sbss = new Intent(postfixToOther.this, step_by_step_solution_postfix_to_infix.class);
+                            intent_sbss.putExtra("tag",postfix_input_exp);
+                            startActivity(intent_sbss);
+                            mInterstitialAd =null;
+                            setAds();
+                        }
+                    });
+                }
+                else {
+                    String postfix_input_exp = editText_postfix_input.getText().toString();
+                    Intent intent_sbss = new Intent(postfixToOther.this, step_by_step_solution_postfix_to_infix.class);
+                    intent_sbss.putExtra("tag",postfix_input_exp);
+                    startActivity(intent_sbss);
+                }
+
             }
             if (v.getId()==R.id.prefix_sbss) {
-                String postfix_input_exp = editText_postfix_input.getText().toString();
-                Intent intent_sbss = new Intent(postfixToOther.this, step_by_step_solution_postfix_to_prefix.class);
-                intent_sbss.putExtra("tag", postfix_input_exp);
-                startActivity(intent_sbss);
+                if(mInterstitialAd!=null) {
+                    mInterstitialAd.show(postfixToOther.this);
+                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            super.onAdDismissedFullScreenContent();
+                            String postfix_input_exp = editText_postfix_input.getText().toString();
+                            Intent intent_sbss = new Intent(postfixToOther.this, step_by_step_solution_postfix_to_prefix.class);
+                            intent_sbss.putExtra("tag", postfix_input_exp);
+                            startActivity(intent_sbss);
+                            mInterstitialAd =null;
+                            setAds();
+                        }
+                    });
+
+                }
+                else {
+                    String postfix_input_exp = editText_postfix_input.getText().toString();
+                    Intent intent_sbss = new Intent(postfixToOther.this, step_by_step_solution_postfix_to_prefix.class);
+                    intent_sbss.putExtra("tag", postfix_input_exp);
+                    startActivity(intent_sbss);
+                }
+
             }
             if(v.getId()==R.id.button_reset)
             {
@@ -169,5 +224,28 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
             sbss_infix.setVisibility(View.GONE);
             sbss_prefix.setVisibility(View.GONE);
         }
+    }
+
+    public void setAds () {
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this,"ca-app-pub-7769405161583944/1245851684", adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+
+                        mInterstitialAd = null;
+                    }
+                });
+
     }
 }
