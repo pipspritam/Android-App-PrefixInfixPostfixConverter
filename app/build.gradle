@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 android {
     compileSdkVersion 31
-    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.prefix_infix_postfix_converter.prefix_infix_postfix_converter"
         minSdkVersion 24

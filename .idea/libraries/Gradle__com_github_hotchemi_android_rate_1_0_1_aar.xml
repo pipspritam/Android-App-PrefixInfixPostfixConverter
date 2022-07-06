@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.hotchemi:android-rate:1.0.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0bea79d146cde21e2308f5885f881527/transformed/jetified-android-rate-1.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0bea79d146cde21e2308f5885f881527/transformed/jetified-android-rate-1.0.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0bea79d146cde21e2308f5885f881527/transformed/jetified-android-rate-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8961c3a3ca967f14cb9ace3b308d518a/transformed/jetified-android-rate-1.0.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8961c3a3ca967f14cb9ace3b308d518a/transformed/jetified-android-rate-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8961c3a3ca967f14cb9ace3b308d518a/transformed/jetified-android-rate-1.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.hotchemi/android-rate/1.0.1/5d97ba3484ff95cefdb32afbfa9d091a077db14f/android-rate-1.0.1-javadoc.jar!/" />
