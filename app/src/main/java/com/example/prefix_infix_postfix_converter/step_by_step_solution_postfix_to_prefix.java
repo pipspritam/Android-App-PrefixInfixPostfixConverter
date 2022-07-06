@@ -46,7 +46,7 @@ public class step_by_step_solution_postfix_to_prefix extends AppCompatActivity {
                     StringBuilder ans = new StringBuilder();
                     for (String j : s)
                         ans.append(j);
-                    textView_prefix_output.setText("Prefix: "+ans.toString());
+                    textView_prefix_output.setText("Prefix: "+ ans);
                 }
             }catch(Exception e)
             {
