@@ -1,5 +1,5 @@
 package com.example.prefix_infix_postfix_converter;
-import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -8,11 +8,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+
 import java.util.Stack;
+
+//ADs
+
+
 public class infixToOther extends AppCompatActivity implements View.OnClickListener {
     private EditText editText_infix_input;
     private TextView textView_prefix_output, textView_postfix_output;
     private Button sbss_postfix, sbss_prefix;
+
+    private InterstitialAd mInterstitialAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +46,12 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
         reset.setOnClickListener(this);
         sbss_postfix.setOnClickListener(this);
         sbss_prefix.setOnClickListener(this);
+
+
+        MobileAds.initialize(this, initializationStatus -> {
+        });
+        setAds();
+
     }
     static int Priority(char ch)
     {
@@ -162,17 +186,60 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
             }
             if (v.getId()==R.id.postfix_sbss)
             {
-                String infix_input_exp = editText_infix_input.getText().toString();
-                Intent intent_sbss = new Intent(infixToOther.this, step_by_step_solution_infix_to_postfix.class);
-                intent_sbss.putExtra("tag",infix_input_exp);
-                startActivity(intent_sbss);
+
+                if(mInterstitialAd!=null) {
+                    mInterstitialAd.show(infixToOther.this);
+                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            super.onAdDismissedFullScreenContent();
+                            String infix_input_exp = editText_infix_input.getText().toString();
+                            Intent intent_sbss = new Intent(infixToOther.this, step_by_step_solution_infix_to_postfix.class);
+                            intent_sbss.putExtra("tag",infix_input_exp);
+                            startActivity(intent_sbss);
+                            mInterstitialAd =null;
+                            setAds();
+                        }
+                    });
+                }
+                else {
+
+                    String infix_input_exp = editText_infix_input.getText().toString();
+                    Intent intent_sbss = new Intent(infixToOther.this, step_by_step_solution_infix_to_postfix.class);
+                    intent_sbss.putExtra("tag",infix_input_exp);
+                    startActivity(intent_sbss);
+                }
+
+
             }
             if (v.getId()==R.id.prefix_sbss)
             {
-                String infix_input_exp = editText_infix_input.getText().toString();
-                Intent intent_sbss = new Intent(infixToOther.this, step_by_step_solution_infix_to_prefix.class);
-                intent_sbss.putExtra("tag",infix_input_exp);
-                startActivity(intent_sbss);
+
+                if(mInterstitialAd!=null) {
+                    mInterstitialAd.show(infixToOther.this);
+                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            super.onAdDismissedFullScreenContent();
+                            String infix_input_exp = editText_infix_input.getText().toString();
+                            Intent intent_sbss = new Intent(infixToOther.this, step_by_step_solution_infix_to_prefix.class);
+                            intent_sbss.putExtra("tag",infix_input_exp);
+                            startActivity(intent_sbss);
+                            mInterstitialAd =null;
+                            setAds();
+                        }
+                    });
+                }
+
+                else  {
+                    String infix_input_exp = editText_infix_input.getText().toString();
+                    Intent intent_sbss = new Intent(infixToOther.this, step_by_step_solution_infix_to_prefix.class);
+                    intent_sbss.putExtra("tag",infix_input_exp);
+                    startActivity(intent_sbss);
+                }
+
+
+
             }
             if(v.getId()==R.id.button_reset)
             {
@@ -194,5 +261,29 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
             sbss_postfix.setVisibility(View.GONE);
             sbss_prefix.setVisibility(View.GONE);
         }
+    }
+
+
+    public void setAds () {
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this,"ca-app-pub-7769405161583944/1245851684", adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+
+                        mInterstitialAd = null;
+                    }
+                });
+
     }
 }

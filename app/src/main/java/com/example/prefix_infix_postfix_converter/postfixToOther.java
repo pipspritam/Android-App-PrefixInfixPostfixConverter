@@ -229,7 +229,11 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
     public void setAds () {
         AdRequest adRequest = new AdRequest.Builder().build();
 
-        InterstitialAd.load(this,"ca-app-pub-7769405161583944/1245851684", adRequest,
+
+        //ca-app-pub-3940256099942544/1033173712 sample
+        // ca-app-pub-7769405161583944/1245851684 original
+        InterstitialAd.load(this,"\n" +
+                        "ca-app-pub-7769405161583944/1245851684 ", adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
