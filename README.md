@@ -26,5 +26,5 @@ Note: Enjoy seamless experience and perfect output.
     * Instagram [@pritam_pips](https://www.instagram.com/pritam_pips "Pritam's instagram")
     
 ## Google Play
-Total download till February 8.3K <br>
+Total download till February 2023 <h3> 8.3K </h3><br>
 Link - [Play Store Link](https://play.google.com/store/apps/details?id=com.prefix_infix_postfix_converter.prefix_infix_postfix_converter)
