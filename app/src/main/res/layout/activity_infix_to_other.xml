@@ -54,13 +54,15 @@
                     android:textColorHint="#ffffff"
                     android:textCursorDrawable="@null"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="VisualLintTextFieldSize" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="15dp"
                     android:orientation="horizontal">
+
                     <Button
                         android:id="@+id/button_convert"
                         android:layout_width="130dp"
@@ -73,7 +75,7 @@
                         android:textColor="#ffffff"
                         android:textSize="27sp"
                         android:textStyle="bold"
-                        tools:ignore="ButtonStyle" />
+                        tools:ignore="ButtonStyle,TextSizeCheck" />
                     <Button
                         android:id="@+id/button_reset"
                         android:layout_width="130dp"
@@ -102,6 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
+                    android:minHeight="48dp"
                     android:padding="5dp"
                     android:text="@string/dot_line"
                     android:textColor="#ffffff"
@@ -131,11 +134,13 @@
                     android:textColor="#ffffff"
                     android:textSize="25sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/postfix_output"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
+                    android:minHeight="48dp"
                     android:padding="5dp"
                     android:text="@string/dot_line"
                     android:textColor="#ffffff"

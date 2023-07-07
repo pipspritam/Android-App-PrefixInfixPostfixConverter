@@ -54,26 +54,28 @@
                     android:digits="0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm()+-*/^$%"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:autofillHints="no" />
+                    android:autofillHints="no"
+                    tools:ignore="VisualLintTextFieldSize" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="15dp"
                     android:orientation="horizontal">
+
                     <Button
                         android:id="@+id/button_convert"
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/button_1"
+                        android:padding="10dp"
                         android:text="@string/convert_button"
                         android:textAllCaps="false"
-                        android:background="@drawable/button_1"
                         android:textColor="#ffffff"
                         android:textSize="27sp"
-                        android:padding="10dp"
                         android:textStyle="bold"
-                        android:layout_marginEnd="20dp"
-                        tools:ignore="ButtonStyle" />
+                        tools:ignore="ButtonStyle,TextSizeCheck" />
                     <Button
                         android:id="@+id/button_reset"
                         android:layout_width="130dp"
@@ -102,6 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
+                    android:minHeight="48dp"
                     android:padding="5dp"
                     android:text="@string/dot_line"
                     android:textColor="#ffffff"
@@ -131,18 +134,19 @@
                     android:textStyle="bold"
                     android:padding="5dp"
                     android:layout_marginBottom="15dp"/>
+
                 <TextView
                     android:id="@+id/infix_output"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:minHeight="48dp"
+                    android:padding="5dp"
                     android:text="@string/dot_line"
                     android:textColor="#ffffff"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
                     android:textIsSelectable="true"
-                    android:padding="5dp"
-                    android:layout_marginBottom="15dp"
-                    />
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
