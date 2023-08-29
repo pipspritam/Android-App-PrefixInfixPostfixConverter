@@ -18,6 +18,7 @@ public class step_by_step_solution_infix_to_postfix extends AppCompatActivity {
         if(bundle!=null) {
             try {
                 String infix_input_exp = bundle.getString("tag");
+                assert infix_input_exp != null;
                 if (infix_input_exp.matches("")) {
                     textView_input.setText("No input string found.Enter Infix String");
                     textView_solution.setText(null);

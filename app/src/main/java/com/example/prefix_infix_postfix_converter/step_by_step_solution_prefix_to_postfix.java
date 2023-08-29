@@ -18,6 +18,7 @@ public class step_by_step_solution_prefix_to_postfix extends AppCompatActivity {
         if(bundle!=null) {
             String prefix_input_exp = bundle.getString("tag");
             try {
+                assert prefix_input_exp != null;
                 if (prefix_input_exp.matches("")) {
                     textView_input.setText("No input string found.Enter Prefix String");
                 }
