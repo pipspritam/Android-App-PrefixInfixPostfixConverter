@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:background="#FFFFFF"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".step_by_step_solution_prefix_to_postfix">
     <TextView
@@ -13,6 +14,7 @@
         android:text="@string/prefix_to_postfix_step_by_step_solution"
         android:gravity="center_horizontal"
         android:background="#EC625F"
+        android:padding="6dp"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"

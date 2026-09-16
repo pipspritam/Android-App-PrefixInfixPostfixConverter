@@ -11,7 +11,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
@@ -31,6 +35,16 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postfix_to_other);
+
+        View postfixLayout = findViewById(R.id.postfix_layout);
+        if (postfixLayout != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(postfixLayout, (v, windowInsets) -> {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+                return windowInsets;
+            });
+        }
+
         editText_postfix_input=findViewById(R.id.postfix_input);
         Button convertButton = findViewById(R.id.button_convert);
         Button reset = findViewById(R.id.button_reset);
@@ -66,12 +80,12 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
             if(v.getId()==R.id.button_convert)
             {
                 String postfix_input_exp = editText_postfix_input.getText().toString();
-                if(postfix_input_exp.matches("")) {
+                if(postfix_input_exp.trim().isEmpty()) {
                     textView_prefix_output.setText(R.string.dot_line);
                     textView_infix_output.setText(R.string.dot_line);
-                    Toast toast_massage_postfix_to_other = Toast.makeText(postfixToOther.this, "Please Enter Input", Toast.LENGTH_SHORT);
-                    toast_massage_postfix_to_other.setGravity(Gravity.BOTTOM, 0, 200);
-                    toast_massage_postfix_to_other.show();
+                    Toast toast_message_postfix_to_other = Toast.makeText(postfixToOther.this, R.string.please_enter_input, Toast.LENGTH_SHORT);
+                    toast_message_postfix_to_other.setGravity(Gravity.BOTTOM, 0, 200);
+                    toast_message_postfix_to_other.show();
                 }
                 else
                 {
@@ -80,7 +94,7 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
                     {
                         if (Character.isLetterOrDigit(postfix_input_exp.charAt(i)))
                         {
-                            s1.push(postfix_input_exp.charAt(i) + "");
+                            s1.push(String.valueOf(postfix_input_exp.charAt(i)));
                         }
                         else {
                             String op1 = s1.peek();
@@ -120,7 +134,7 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
                         }
                         else if (Character.isLetterOrDigit(result_infix.charAt(i)))
                         {
-                            operands.push(result_infix.charAt(i) + "");
+                            operands.push(String.valueOf(result_infix.charAt(i)));
                         }
                         else
                         {
@@ -154,55 +168,13 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
                     sbss_prefix.setVisibility(View.VISIBLE);
                 }
             }
-            if (v.getId()==R.id.infix_sbss)
+            if (v.getId() == R.id.infix_sbss)
             {
-                if(mInterstitialAd!=null) {
-                    mInterstitialAd.show(postfixToOther.this);
-                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                        @Override
-                        public void onAdDismissedFullScreenContent() {
-                            super.onAdDismissedFullScreenContent();
-                            String postfix_input_exp = editText_postfix_input.getText().toString();
-                            Intent intent_sbss = new Intent(postfixToOther.this, step_by_step_solution_postfix_to_infix.class);
-                            intent_sbss.putExtra("tag",postfix_input_exp);
-                            startActivity(intent_sbss);
-                            mInterstitialAd =null;
-                            setAds();
-                        }
-                    });
-                }
-                else {
-                    String postfix_input_exp = editText_postfix_input.getText().toString();
-                    Intent intent_sbss = new Intent(postfixToOther.this, step_by_step_solution_postfix_to_infix.class);
-                    intent_sbss.putExtra("tag",postfix_input_exp);
-                    startActivity(intent_sbss);
-                }
-
+                showStepByStepSolution(step_by_step_solution_postfix_to_infix.class);
             }
-            if (v.getId()==R.id.prefix_sbss) {
-                if(mInterstitialAd!=null) {
-                    mInterstitialAd.show(postfixToOther.this);
-                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                        @Override
-                        public void onAdDismissedFullScreenContent() {
-                            super.onAdDismissedFullScreenContent();
-                            String postfix_input_exp = editText_postfix_input.getText().toString();
-                            Intent intent_sbss = new Intent(postfixToOther.this, step_by_step_solution_postfix_to_prefix.class);
-                            intent_sbss.putExtra("tag", postfix_input_exp);
-                            startActivity(intent_sbss);
-                            mInterstitialAd =null;
-                            setAds();
-                        }
-                    });
-
-                }
-                else {
-                    String postfix_input_exp = editText_postfix_input.getText().toString();
-                    Intent intent_sbss = new Intent(postfixToOther.this, step_by_step_solution_postfix_to_prefix.class);
-                    intent_sbss.putExtra("tag", postfix_input_exp);
-                    startActivity(intent_sbss);
-                }
-
+            if (v.getId() == R.id.prefix_sbss)
+            {
+                showStepByStepSolution(step_by_step_solution_postfix_to_prefix.class);
             }
             if(v.getId()==R.id.button_reset)
             {
@@ -218,22 +190,49 @@ public class postfixToOther extends AppCompatActivity implements View.OnClickLis
             editText_postfix_input.setText(null);
             textView_infix_output.setText(R.string.dot_line);
             textView_prefix_output.setText(R.string.dot_line);
-            Toast toast_massage_postfix_to_other = Toast.makeText(postfixToOther.this,R.string.invalid_input,Toast.LENGTH_SHORT);
-            toast_massage_postfix_to_other.setGravity(Gravity.BOTTOM,0,200);
-            toast_massage_postfix_to_other.show();
+            Toast toast_message_postfix_to_other = Toast.makeText(postfixToOther.this,R.string.invalid_input,Toast.LENGTH_SHORT);
+            toast_message_postfix_to_other.setGravity(Gravity.BOTTOM,0,200);
+            toast_message_postfix_to_other.show();
             sbss_infix.setVisibility(View.GONE);
             sbss_prefix.setVisibility(View.GONE);
+        }
+    }
+
+    private void showStepByStepSolution(Class<?> targetActivity) {
+        String postfix_input_exp = editText_postfix_input.getText().toString();
+        Intent intent_sbss = new Intent(postfixToOther.this, targetActivity);
+        intent_sbss.putExtra("tag", postfix_input_exp);
+
+        if (mInterstitialAd != null) {
+            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    super.onAdDismissedFullScreenContent();
+                    mInterstitialAd = null;
+                    setAds();
+                    startActivity(intent_sbss);
+                }
+
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    mInterstitialAd = null;
+                    setAds();
+                    startActivity(intent_sbss);
+                }
+            });
+            mInterstitialAd.show(postfixToOther.this);
+        } else {
+            startActivity(intent_sbss);
         }
     }
 
     public void setAds () {
         AdRequest adRequest = new AdRequest.Builder().build();
 
-
         //ca-app-pub-3940256099942544/1033173712 sample
         // ca-app-pub-7769405161583944/1245851684 original
-        InterstitialAd.load(this,"\n" +
-                        "ca-app-pub-7769405161583944/1245851684 ", adRequest,
+        InterstitialAd.load(this, "ca-app-pub-7769405161583944/1245851684", adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {

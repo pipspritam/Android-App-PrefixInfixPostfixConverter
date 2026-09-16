@@ -19,20 +19,22 @@ public class step_by_step_solution_prefix_to_infix extends AppCompatActivity {
             String prefix_input_exp = bundle.getString("tag");
             try {
                 assert prefix_input_exp != null;
-                if (prefix_input_exp.matches("")) {
-                    textView_input.setText("No input string found.Enter Prefix String");
+                if (prefix_input_exp.trim().isEmpty()) {
+                    textView_input.setText("No input string found. Enter Prefix String");
+                    textView_solution.setText(null);
                 }
                 else {
                     textView_input.setText("Prefix: "+prefix_input_exp);
+                    StringBuilder solutionBuilder = new StringBuilder();
                     Stack<String> stack = new Stack<>();
                     int l = prefix_input_exp.length();
                     int j=0;
                     for(int i = l - 1; i >= 0; i--)
                     {
-                        textView_solution.append("\n------------Step "+(j+1)+"------------\n");
+                        solutionBuilder.append("\n------------Step ").append(j + 1).append("------------\n");
                         j++;
                         char c=prefix_input_exp.charAt(i);
-                        textView_solution.append("Character Scan: "+c+"\n");
+                        solutionBuilder.append("Character Scan: ").append(c).append("\n");
                         if (!Character.isLetterOrDigit(c))
                         {
                             String op1 = stack.pop();
@@ -42,10 +44,11 @@ public class step_by_step_solution_prefix_to_infix extends AppCompatActivity {
                         }
                         else
                         {
-                            stack.push(c + "");
+                            stack.push(String.valueOf(c));
                         }
-                        textView_solution.append("Stack: "+stack+"\n");
+                        solutionBuilder.append("Stack: ").append(stack).append("\n");
                     }
+                    textView_solution.setText(solutionBuilder.toString());
                     String infix_output = stack.pop();
                     textView_infix_output.setText("Infix: "+infix_output);
                 }
@@ -57,7 +60,7 @@ public class step_by_step_solution_prefix_to_infix extends AppCompatActivity {
         }
         else
         {
-            textView_input.setText("No input string found.Enter Prefix String");
+            textView_input.setText("No input string found. Enter Prefix String");
             textView_solution.setText(null);
         }
     }

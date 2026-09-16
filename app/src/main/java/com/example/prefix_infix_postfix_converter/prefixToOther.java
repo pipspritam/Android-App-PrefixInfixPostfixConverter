@@ -13,7 +13,12 @@ import android.widget.Toast;
 import java.util.Stack;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
@@ -34,6 +39,16 @@ public class prefixToOther extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prefix_to_other);
+
+        View prefixLayout = findViewById(R.id.prefix_layout);
+        if (prefixLayout != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(prefixLayout, (v, windowInsets) -> {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+                return windowInsets;
+            });
+        }
+
         editText_prefix_input=findViewById(R.id.prefix_input);
         Button convertButton = findViewById(R.id.button_convert);
         Button reset = findViewById(R.id.button_reset);
@@ -57,13 +72,13 @@ public class prefixToOther extends AppCompatActivity implements View.OnClickList
             if(v.getId()==R.id.button_convert)
             {
                 String prefix_input_exp = editText_prefix_input.getText().toString();
-                if(prefix_input_exp.matches(""))
+                if(prefix_input_exp.trim().isEmpty())
                 {
                     textView_postfix_output.setText(R.string.dot_line);
                     textView_infix_output.setText(R.string.dot_line);
-                    Toast toast_massage_infix_to_other = Toast.makeText(prefixToOther.this,"Please Enter Input",Toast.LENGTH_SHORT);
-                    toast_massage_infix_to_other.setGravity(Gravity.BOTTOM,0,200);
-                    toast_massage_infix_to_other.show();
+                    Toast toast_message_prefix_to_other = Toast.makeText(prefixToOther.this, R.string.please_enter_input, Toast.LENGTH_SHORT);
+                    toast_message_prefix_to_other.setGravity(Gravity.BOTTOM,0,200);
+                    toast_message_prefix_to_other.show();
                 }
                 else {
                     Stack<String> s= new Stack<>();
@@ -79,7 +94,7 @@ public class prefixToOther extends AppCompatActivity implements View.OnClickList
                         }
                         else
                         {
-                            s.push( prefix_input_exp.charAt(i)+"");
+                            s.push(String.valueOf(prefix_input_exp.charAt(i)));
                         }
                     }
                     String result_postfix = s.peek();
@@ -90,7 +105,7 @@ public class prefixToOther extends AppCompatActivity implements View.OnClickList
                     {
                         if (Character.isLetterOrDigit(result_postfix.charAt(i)))
                         {
-                            s1.push(result_postfix.charAt(i) + "");
+                            s1.push(String.valueOf(result_postfix.charAt(i)));
                         }
                         else
                         {
@@ -107,61 +122,13 @@ public class prefixToOther extends AppCompatActivity implements View.OnClickList
                     sbss_infix.setVisibility(View.VISIBLE);
                 }
             }
-            if (v.getId()==R.id.infix_sbss)
+            if (v.getId() == R.id.infix_sbss)
             {
-                if(mInterstitialAd!=null) {
-                    mInterstitialAd.show(prefixToOther.this);
-                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                        @Override
-                        public void onAdDismissedFullScreenContent() {
-                            super.onAdDismissedFullScreenContent();
-                            String prefix_input_exp = editText_prefix_input.getText().toString();
-                            Intent intent_sbss = new Intent(prefixToOther.this, step_by_step_solution_prefix_to_infix.class);
-                            intent_sbss.putExtra("tag", prefix_input_exp);
-                            startActivity(intent_sbss);
-                            mInterstitialAd =null;
-                            setAds();
-                        }
-                    });
-
-                }
-                else  {
-                    String prefix_input_exp = editText_prefix_input.getText().toString();
-                    Intent intent_sbss = new Intent(prefixToOther.this, step_by_step_solution_prefix_to_infix.class);
-                    intent_sbss.putExtra("tag",prefix_input_exp);
-                    startActivity(intent_sbss);
-                }
-
-
+                showStepByStepSolution(step_by_step_solution_prefix_to_infix.class);
             }
-            if (v.getId()==R.id.postfix_sbss) {
-
-                if(mInterstitialAd!=null) {
-                    mInterstitialAd.show(prefixToOther.this);
-                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                        @Override
-                        public void onAdDismissedFullScreenContent() {
-                            super.onAdDismissedFullScreenContent();
-                            String prefix_input_exp = editText_prefix_input.getText().toString();
-                            Intent intent_sbss = new Intent(prefixToOther.this, step_by_step_solution_prefix_to_postfix.class);
-                            intent_sbss.putExtra("tag", prefix_input_exp);
-                            startActivity(intent_sbss);
-                            mInterstitialAd =null;
-                            setAds();
-                        }
-                    });
-
-
-                }
-
-                else  {
-                    String prefix_input_exp = editText_prefix_input.getText().toString();
-                    Intent intent_sbss = new Intent(prefixToOther.this, step_by_step_solution_prefix_to_postfix.class);
-                    intent_sbss.putExtra("tag", prefix_input_exp);
-                    startActivity(intent_sbss);
-                }
-
-
+            if (v.getId() == R.id.postfix_sbss)
+            {
+                showStepByStepSolution(step_by_step_solution_prefix_to_postfix.class);
             }
             if(v.getId()==R.id.button_reset)
             {
@@ -177,22 +144,49 @@ public class prefixToOther extends AppCompatActivity implements View.OnClickList
             editText_prefix_input.setText(null);
             textView_infix_output.setText(R.string.dot_line);
             textView_postfix_output.setText(R.string.dot_line);
-            Toast toast_massage_prefix_to_other = Toast.makeText(prefixToOther.this,R.string.invalid_input,Toast.LENGTH_SHORT);
-            toast_massage_prefix_to_other.setGravity(Gravity.BOTTOM,0,200);
-            toast_massage_prefix_to_other.show();
+            Toast toast_message_prefix_to_other = Toast.makeText(prefixToOther.this,R.string.invalid_input,Toast.LENGTH_SHORT);
+            toast_message_prefix_to_other.setGravity(Gravity.BOTTOM,0,200);
+            toast_message_prefix_to_other.show();
             sbss_postfix.setVisibility(View.GONE);
             sbss_infix.setVisibility(View.GONE);
+        }
+    }
+
+    private void showStepByStepSolution(Class<?> targetActivity) {
+        String prefix_input_exp = editText_prefix_input.getText().toString();
+        Intent intent_sbss = new Intent(prefixToOther.this, targetActivity);
+        intent_sbss.putExtra("tag", prefix_input_exp);
+
+        if (mInterstitialAd != null) {
+            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    super.onAdDismissedFullScreenContent();
+                    mInterstitialAd = null;
+                    setAds();
+                    startActivity(intent_sbss);
+                }
+
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    mInterstitialAd = null;
+                    setAds();
+                    startActivity(intent_sbss);
+                }
+            });
+            mInterstitialAd.show(prefixToOther.this);
+        } else {
+            startActivity(intent_sbss);
         }
     }
 
     public void setAds () {
         AdRequest adRequest = new AdRequest.Builder().build();
 
-
         //ca-app-pub-3940256099942544/1033173712 sample
         // ca-app-pub-7769405161583944/1245851684 original
-        InterstitialAd.load(this,"\n" +
-                        "ca-app-pub-7769405161583944/1245851684 ", adRequest,
+        InterstitialAd.load(this, "ca-app-pub-7769405161583944/1245851684", adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
@@ -211,6 +205,5 @@ public class prefixToOther extends AppCompatActivity implements View.OnClickList
                 });
 
     }
-
 }
 

@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import hotchemi.android.rate.AppRate;
 
@@ -16,12 +20,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        View mainLayout = findViewById(R.id.main_layout);
+        if (mainLayout != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(mainLayout, (v, windowInsets) -> {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+                return windowInsets;
+            });
+        }
+
         Button prefixToOtherButton = findViewById(R.id.prefix_button);
         Button infixToOtherButton = findViewById(R.id.infix_button);
         Button postfixToOtherButton = findViewById(R.id.postfix_button);
         prefixToOtherButton.setOnClickListener(this);
         postfixToOtherButton.setOnClickListener(this);
         infixToOtherButton.setOnClickListener(this);
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                showExitDialog();
+            }
+        });
 
         AppRate.with(this)
                 .setInstallDays(1)
@@ -48,11 +69,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent_postfix);
         }
     }
-    public void onBackPressed() {
-        AlertDialog.Builder alertDialogbuilder;
-        alertDialogbuilder = new AlertDialog.Builder(MainActivity.this);
+
+    private void showExitDialog() {
+        AlertDialog.Builder alertDialogbuilder = new AlertDialog.Builder(MainActivity.this);
         alertDialogbuilder.setTitle(R.string.alert_title);
-        alertDialogbuilder.setMessage(R.string.alert_massage);
+        alertDialogbuilder.setMessage(R.string.alert_message);
         alertDialogbuilder.setCancelable(false);
         alertDialogbuilder.setPositiveButton("Yes", (dialog, which) -> finish());
         alertDialogbuilder.setNegativeButton("No", (dialog, which) -> dialog.cancel());

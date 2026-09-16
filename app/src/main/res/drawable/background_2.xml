@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="360dp"
+    android:height="640dp"
+    android:viewportWidth="360"
+    android:viewportHeight="640">
+
+    <!-- Deep Midnight Slate Base Gradient -->
+    <path android:pathData="M0,0h360v640h-360z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="180"
+                android:startY="0"
+                android:endX="180"
+                android:endY="640"
+                android:type="linear">
+                <item android:color="#25272D" android:offset="0.0" />
+                <item android:color="#1B1C20" android:offset="0.5" />
+                <item android:color="#121316" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Top Ambient Coral Aurora Glow -->
+    <path android:pathData="M0,0h360v360h-360z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:centerX="180"
+                android:centerY="0"
+                android:gradientRadius="280"
+                android:type="radial">
+                <item android:color="#66EC625F" android:offset="0.0" />
+                <item android:color="#20EC625F" android:offset="0.55" />
+                <item android:color="#00EC625F" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Bottom Ambient Coral Aurora Glow -->
+    <path android:pathData="M0,320h360v320h-360z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:centerX="180"
+                android:centerY="640"
+                android:gradientRadius="260"
+                android:type="radial">
+                <item android:color="#50EC625F" android:offset="0.0" />
+                <item android:color="#18EC625F" android:offset="0.55" />
+                <item android:color="#00EC625F" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>

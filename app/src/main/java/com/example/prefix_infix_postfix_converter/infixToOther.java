@@ -11,7 +11,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
@@ -35,6 +39,16 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infix_to_other);
+
+        View infixLayout = findViewById(R.id.infix_layout);
+        if (infixLayout != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(infixLayout, (v, windowInsets) -> {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+                return windowInsets;
+            });
+        }
+
         editText_infix_input=findViewById(R.id.infix_input);
         Button convertButton = findViewById(R.id.button_convert);
         Button reset = findViewById(R.id.button_reset);
@@ -76,22 +90,22 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
             if(v.getId()==R.id.button_convert)
             {
                 String infix_input_exp = editText_infix_input.getText().toString();
-                if(infix_input_exp.matches(""))
+                if(infix_input_exp.trim().isEmpty())
                 {
                     textView_postfix_output.setText(R.string.dot_line);
                     textView_prefix_output.setText(R.string.dot_line);
-                    Toast toast_massage_infix_to_other = Toast.makeText(infixToOther.this,"Please Enter Input",Toast.LENGTH_SHORT);
-                    toast_massage_infix_to_other.setGravity(Gravity.BOTTOM,0,200);
-                    toast_massage_infix_to_other.show();
+                    Toast toast_message_infix_to_other = Toast.makeText(infixToOther.this, R.string.please_enter_input, Toast.LENGTH_SHORT);
+                    toast_message_infix_to_other.setGravity(Gravity.BOTTOM,0,200);
+                    toast_message_infix_to_other.show();
                 }
                 else if(!Character.isLetterOrDigit(infix_input_exp.charAt(0)) && !(infix_input_exp.charAt(0)=='('))
                 {
                     editText_infix_input.setText(null);
                     textView_postfix_output.setText(R.string.dot_line);
                     textView_prefix_output.setText(R.string.dot_line);
-                    Toast toast_massage_infix_to_other = Toast.makeText(infixToOther.this,R.string.invalid_input,Toast.LENGTH_SHORT);
-                    toast_massage_infix_to_other.setGravity(Gravity.BOTTOM,0,200);
-                    toast_massage_infix_to_other.show();
+                    Toast toast_message_infix_to_other = Toast.makeText(infixToOther.this,R.string.invalid_input,Toast.LENGTH_SHORT);
+                    toast_message_infix_to_other.setGravity(Gravity.BOTTOM,0,200);
+                    toast_message_infix_to_other.show();
                 }
                 else {
                     StringBuilder result_postfix = new StringBuilder();
@@ -184,62 +198,13 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
                     sbss_prefix.setVisibility(View.VISIBLE);
                 }
             }
-            if (v.getId()==R.id.postfix_sbss)
+            if (v.getId() == R.id.postfix_sbss)
             {
-
-                if(mInterstitialAd!=null) {
-                    mInterstitialAd.show(infixToOther.this);
-                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                        @Override
-                        public void onAdDismissedFullScreenContent() {
-                            super.onAdDismissedFullScreenContent();
-                            String infix_input_exp = editText_infix_input.getText().toString();
-                            Intent intent_sbss = new Intent(infixToOther.this, step_by_step_solution_infix_to_postfix.class);
-                            intent_sbss.putExtra("tag",infix_input_exp);
-                            startActivity(intent_sbss);
-                            mInterstitialAd =null;
-                            setAds();
-                        }
-                    });
-                }
-                else {
-
-                    String infix_input_exp = editText_infix_input.getText().toString();
-                    Intent intent_sbss = new Intent(infixToOther.this, step_by_step_solution_infix_to_postfix.class);
-                    intent_sbss.putExtra("tag",infix_input_exp);
-                    startActivity(intent_sbss);
-                }
-
-
+                showStepByStepSolution(step_by_step_solution_infix_to_postfix.class);
             }
-            if (v.getId()==R.id.prefix_sbss)
+            if (v.getId() == R.id.prefix_sbss)
             {
-
-                if(mInterstitialAd!=null) {
-                    mInterstitialAd.show(infixToOther.this);
-                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                        @Override
-                        public void onAdDismissedFullScreenContent() {
-                            super.onAdDismissedFullScreenContent();
-                            String infix_input_exp = editText_infix_input.getText().toString();
-                            Intent intent_sbss = new Intent(infixToOther.this, step_by_step_solution_infix_to_prefix.class);
-                            intent_sbss.putExtra("tag",infix_input_exp);
-                            startActivity(intent_sbss);
-                            mInterstitialAd =null;
-                            setAds();
-                        }
-                    });
-                }
-
-                else  {
-                    String infix_input_exp = editText_infix_input.getText().toString();
-                    Intent intent_sbss = new Intent(infixToOther.this, step_by_step_solution_infix_to_prefix.class);
-                    intent_sbss.putExtra("tag",infix_input_exp);
-                    startActivity(intent_sbss);
-                }
-
-
-
+                showStepByStepSolution(step_by_step_solution_infix_to_prefix.class);
             }
             if(v.getId()==R.id.button_reset)
             {
@@ -255,11 +220,40 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
             editText_infix_input.setText(null);
             textView_prefix_output.setText(R.string.dot_line);
             textView_postfix_output.setText(R.string.dot_line);
-            Toast toast_massage_infix_to_other = Toast.makeText(infixToOther.this,R.string.invalid_input,Toast.LENGTH_SHORT);
-            toast_massage_infix_to_other.setGravity(Gravity.BOTTOM,0,200);
-            toast_massage_infix_to_other.show();
+            Toast toast_message_infix_to_other = Toast.makeText(infixToOther.this,R.string.invalid_input,Toast.LENGTH_SHORT);
+            toast_message_infix_to_other.setGravity(Gravity.BOTTOM,0,200);
+            toast_message_infix_to_other.show();
             sbss_postfix.setVisibility(View.GONE);
             sbss_prefix.setVisibility(View.GONE);
+        }
+    }
+
+    private void showStepByStepSolution(Class<?> targetActivity) {
+        String infix_input_exp = editText_infix_input.getText().toString();
+        Intent intent_sbss = new Intent(infixToOther.this, targetActivity);
+        intent_sbss.putExtra("tag", infix_input_exp);
+
+        if (mInterstitialAd != null) {
+            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    super.onAdDismissedFullScreenContent();
+                    mInterstitialAd = null;
+                    setAds();
+                    startActivity(intent_sbss);
+                }
+
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    mInterstitialAd = null;
+                    setAds();
+                    startActivity(intent_sbss);
+                }
+            });
+            mInterstitialAd.show(infixToOther.this);
+        } else {
+            startActivity(intent_sbss);
         }
     }
 

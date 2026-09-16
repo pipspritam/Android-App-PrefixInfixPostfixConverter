@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:background="#FFFFFF"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".step_by_step_solution_infix_to_postfix">
     <TextView
@@ -14,6 +15,7 @@
         android:textColor="#000000"
         android:gravity="center_horizontal"
         android:background="#EC625F"
+        android:padding="6dp"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="20dp"

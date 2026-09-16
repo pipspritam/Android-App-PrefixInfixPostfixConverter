@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:background="#FFFFFF"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".step_by_step_solution_postfix_to_prefix">
     <TextView
@@ -15,6 +16,7 @@
         android:textSize="20sp"
         android:gravity="center_horizontal"
         android:background="#EC625F"
+        android:padding="6dp"
         android:textStyle="bold"
         android:layout_marginBottom="20dp"
         android:layout_gravity="center_horizontal"/>

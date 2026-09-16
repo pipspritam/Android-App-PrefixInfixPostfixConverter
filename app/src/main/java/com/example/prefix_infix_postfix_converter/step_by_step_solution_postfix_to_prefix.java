@@ -19,18 +19,20 @@ public class step_by_step_solution_postfix_to_prefix extends AppCompatActivity {
             String postfix_input_exp = bundle.getString("tag");
             try {
                 assert postfix_input_exp != null;
-                if (postfix_input_exp.matches("")) {
-                    textView_input.setText("No input string found.Enter Postfix String");
+                if (postfix_input_exp.trim().isEmpty()) {
+                    textView_input.setText("No input string found. Enter Postfix String");
+                    textView_solution.setText(null);
                 }
                 else {
                     textView_input.setText("Postfix: " + postfix_input_exp);
+                    StringBuilder solutionBuilder = new StringBuilder();
                     Stack<String> s = new Stack<>();
                     int length = postfix_input_exp.length();
                     int i;
                     for (i = 0; i < length; i++) {
-                        textView_solution.append("\n------------Step "+(i+1)+"------------\n");
+                        solutionBuilder.append("\n------------Step ").append(i + 1).append("------------\n");
                         char c=postfix_input_exp.charAt(i);
-                        textView_solution.append("Character Scan: "+c+"\n");
+                        solutionBuilder.append("Character Scan: ").append(c).append("\n");
                         if (!Character.isLetterOrDigit(postfix_input_exp.charAt(i))) {
                             String op1 = s.peek();
                             s.pop();
@@ -40,10 +42,11 @@ public class step_by_step_solution_postfix_to_prefix extends AppCompatActivity {
                             s.push(temp);
                         }
                         else {
-                            s.push(postfix_input_exp.charAt(i) + "");
+                            s.push(String.valueOf(postfix_input_exp.charAt(i)));
                         }
-                        textView_solution.append("Stack: "+s+"\n");
+                        solutionBuilder.append("Stack: ").append(s).append("\n");
                     }
+                    textView_solution.setText(solutionBuilder.toString());
                     StringBuilder ans = new StringBuilder();
                     for (String j : s)
                         ans.append(j);
@@ -57,7 +60,7 @@ public class step_by_step_solution_postfix_to_prefix extends AppCompatActivity {
         }
         else
         {
-            textView_input.setText("No input string found.Enter Postfix String");
+            textView_input.setText("No input string found. Enter Postfix String");
             textView_solution.setText(null);
         }
     }

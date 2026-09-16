@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 android {
-    compileSdk 35
+    compileSdk 36
     defaultConfig {
         applicationId "com.prefix_infix_postfix_converter.prefix_infix_postfix_converter"
         minSdk 24
-        targetSdk 35
+        targetSdk 36
         versionCode 18
         versionName "2.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -16,8 +16,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     namespace 'com.example.prefix_infix_postfix_converter'
 }
