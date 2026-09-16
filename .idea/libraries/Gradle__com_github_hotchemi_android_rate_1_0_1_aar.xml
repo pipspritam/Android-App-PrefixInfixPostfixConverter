@@ -1,15 +1,15 @@
 <component name="libraryTable">
-  <library name="Gradle: com.github.hotchemi:android-rate:1.0.1@aar">
+  <library name="Gradle: com.github.hotchemi:android-rate:1.0.1@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9dc55bdf8e4657440ee74ad5c166a1ba/transformed/jetified-android-rate-1.0.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9dc55bdf8e4657440ee74ad5c166a1ba/transformed/jetified-android-rate-1.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9dc55bdf8e4657440ee74ad5c166a1ba/transformed/jetified-android-rate-1.0.1/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-4/218e46d9bc5ef3e60f3e0e2b08232601/transformed/jetified-android-rate-1.0.1/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-4/218e46d9bc5ef3e60f3e0e2b08232601/transformed/jetified-android-rate-1.0.1/res" />
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/transforms-4/218e46d9bc5ef3e60f3e0e2b08232601/transformed/jetified-android-rate-1.0.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.hotchemi/android-rate/1.0.1/5d97ba3484ff95cefdb32afbfa9d091a077db14f/android-rate-1.0.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/com.github.hotchemi/android-rate/1.0.1/5d97ba3484ff95cefdb32afbfa9d091a077db14f/android-rate-1.0.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.hotchemi/android-rate/1.0.1/c3da8f4f80610c8dff7624e9288b888fd9b19183/android-rate-1.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/com.github.hotchemi/android-rate/1.0.1/c3da8f4f80610c8dff7624e9288b888fd9b19183/android-rate-1.0.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

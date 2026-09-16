@@ -1,11 +1,11 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.android.gms:play-services-ads-base:22.3.0@aar">
+  <library name="Gradle: com.google.android.gms:play-services-ads-base:22.3.0@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d3e6e045056f925ed76e5d1eb3abde71/transformed/jetified-play-services-ads-base-22.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d3e6e045056f925ed76e5d1eb3abde71/transformed/jetified-play-services-ads-base-22.3.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-4/d17d76088f48749f68e63b5d500ae36e/transformed/jetified-play-services-ads-base-22.3.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/transforms-4/d17d76088f48749f68e63b5d500ae36e/transformed/jetified-play-services-ads-base-22.3.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-base/22.3.0/e3b892141a4b402c234b153f243f7fd418b25d0d/play-services-ads-base-22.3.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-base/22.3.0/e3b892141a4b402c234b153f243f7fd418b25d0d/play-services-ads-base-22.3.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>
