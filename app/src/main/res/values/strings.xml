@@ -24,4 +24,6 @@
     <string name="postfix_to_prefix_step_by_step_solution">Postfix To Prefix Step By Step Solution</string>
     <string name="prefix_to_infix_step_by_step_solution">Prefix To Infix Step By Step Solution</string>
     <string name="prefix_to_postfix_step_by_step_solution">Prefix To Postfix Step By Step Solution</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-7769405161583944~1507315374</string>
+    <string name="admob_interstitial_id" translatable="false">ca-app-pub-7769405161583944/1245851684</string>
 </resources>

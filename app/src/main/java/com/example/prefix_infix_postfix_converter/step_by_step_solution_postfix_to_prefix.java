@@ -1,8 +1,12 @@
 package com.example.prefix_infix_postfix_converter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import java.util.Stack;
 public class step_by_step_solution_postfix_to_prefix extends AppCompatActivity {
@@ -11,6 +15,15 @@ public class step_by_step_solution_postfix_to_prefix extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_by_step_solution_postfix_to_prefix);
+        View sbssLayout = findViewById(R.id.sbss_layout);
+        if (sbssLayout != null) {
+            int sidePad = (int) (16 * getResources().getDisplayMetrics().density);
+            ViewCompat.setOnApplyWindowInsetsListener(sbssLayout, (v, windowInsets) -> {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(insets.left + sidePad, insets.top, insets.right + sidePad, insets.bottom);
+                return windowInsets;
+            });
+        }
         TextView textView_input = findViewById(R.id.input);
         TextView textView_solution = findViewById(R.id.solution);
         TextView textView_prefix_output = findViewById(R.id.prefix_output_final);

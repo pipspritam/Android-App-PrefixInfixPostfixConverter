@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sbss_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    android:background="#FFFFFF"
+    android:background="@drawable/background_2"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".step_by_step_solution_prefix_to_infix">
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/prefix_to_infix_step_by_step_solution"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:gravity="center_horizontal"
-        android:background="#EC625F"
-        android:padding="6dp"
+        android:background="@drawable/button_2"
+        android:padding="10dp"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="20dp"
@@ -26,12 +28,15 @@
         android:id="@+id/input"
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
+        android:textIsSelectable="true"
         android:layout_marginBottom="20dp"
         android:textSize="25sp"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,14 +46,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textStyle="bold"
-                android:textSize="25sp"
+                android:textColor="#FFFFFF"
+                android:textIsSelectable="true"
+                android:textSize="22sp"
                 android:layout_marginBottom="20dp"
                 android:id="@+id/solution"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:id="@+id/infix_output_final"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
+                android:textIsSelectable="true"
+                android:layout_marginBottom="20dp"
                 android:layout_gravity="center_horizontal"
                 android:textSize="25sp"
                 android:textStyle="bold"/>

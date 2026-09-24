@@ -1,39 +1,28 @@
 package com.example.prefix_infix_postfix_converter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-
 import java.util.Stack;
-
-//ADs
 
 
 public class infixToOther extends AppCompatActivity implements View.OnClickListener {
     private EditText editText_infix_input;
     private TextView textView_prefix_output, textView_postfix_output;
     private Button sbss_postfix, sbss_prefix;
-
-    private InterstitialAd mInterstitialAd;
+    private String lastConvertedInput = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +31,10 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
 
         View infixLayout = findViewById(R.id.infix_layout);
         if (infixLayout != null) {
+            int sidePad = (int) (16 * getResources().getDisplayMetrics().density);
             ViewCompat.setOnApplyWindowInsetsListener(infixLayout, (v, windowInsets) -> {
                 Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
-                v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+                v.setPadding(insets.left + sidePad, insets.top, insets.right + sidePad, insets.bottom);
                 return windowInsets;
             });
         }
@@ -61,10 +51,7 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
         sbss_postfix.setOnClickListener(this);
         sbss_prefix.setOnClickListener(this);
 
-
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-        setAds();
+        AdManager.loadInterstitial(this);
 
     }
     static int Priority(char ch)
@@ -84,28 +71,41 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
         }
         return -1;
     }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            view.clearFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
+    }
+
     @Override
     public void onClick(View v) {
         try {
             if(v.getId()==R.id.button_convert)
             {
-                String infix_input_exp = editText_infix_input.getText().toString();
-                if(infix_input_exp.trim().isEmpty())
+                hideKeyboard();
+                String infix_input_exp = editText_infix_input.getText().toString().trim();
+                if(infix_input_exp.isEmpty())
                 {
                     textView_postfix_output.setText(R.string.dot_line);
                     textView_prefix_output.setText(R.string.dot_line);
-                    Toast toast_message_infix_to_other = Toast.makeText(infixToOther.this, R.string.please_enter_input, Toast.LENGTH_SHORT);
-                    toast_message_infix_to_other.setGravity(Gravity.BOTTOM,0,200);
-                    toast_message_infix_to_other.show();
+                    sbss_postfix.setVisibility(View.GONE);
+                    sbss_prefix.setVisibility(View.GONE);
+                    Toast.makeText(infixToOther.this, R.string.please_enter_input, Toast.LENGTH_SHORT).show();
                 }
                 else if(!Character.isLetterOrDigit(infix_input_exp.charAt(0)) && !(infix_input_exp.charAt(0)=='('))
                 {
                     editText_infix_input.setText(null);
                     textView_postfix_output.setText(R.string.dot_line);
                     textView_prefix_output.setText(R.string.dot_line);
-                    Toast toast_message_infix_to_other = Toast.makeText(infixToOther.this,R.string.invalid_input,Toast.LENGTH_SHORT);
-                    toast_message_infix_to_other.setGravity(Gravity.BOTTOM,0,200);
-                    toast_message_infix_to_other.show();
+                    sbss_postfix.setVisibility(View.GONE);
+                    sbss_prefix.setVisibility(View.GONE);
+                    Toast.makeText(infixToOther.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
                 }
                 else {
                     StringBuilder result_postfix = new StringBuilder();
@@ -133,9 +133,12 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                     while (!stack.isEmpty()){
-                        result_postfix.append(stack.pop());
+                        char popped = stack.pop();
+                        if (popped == '(') {
+                            throw new IllegalArgumentException("Unmatched parenthesis");
+                        }
+                        result_postfix.append(popped);
                     }
-                    textView_postfix_output.setText(result_postfix.toString());
                     //infix to prefix
                     Stack<Character> operators = new Stack<>();
                     Stack<String> operands = new Stack<>();
@@ -163,7 +166,7 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
                         }
                         else if (Character.isLetterOrDigit(infix_input_exp.charAt(i)))
                         {
-                            operands.push(infix_input_exp.charAt(i) + "");
+                            operands.push(String.valueOf(infix_input_exp.charAt(i)));
                         }
                         else
                         {
@@ -192,7 +195,12 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
                         String tmp = op + op2 + op1;
                         operands.push(tmp);
                     }
+                    if (operands.size() != 1) {
+                        throw new IllegalArgumentException("Invalid infix expression");
+                    }
                     String result_prefix= operands.peek();
+                    lastConvertedInput = infix_input_exp;
+                    textView_postfix_output.setText(result_postfix.toString());
                     textView_prefix_output.setText(result_prefix);
                     sbss_postfix.setVisibility(View.VISIBLE);
                     sbss_prefix.setVisibility(View.VISIBLE);
@@ -208,6 +216,8 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
             }
             if(v.getId()==R.id.button_reset)
             {
+                hideKeyboard();
+                lastConvertedInput = "";
                 sbss_postfix.setVisibility(View.GONE);
                 sbss_prefix.setVisibility(View.GONE);
                 editText_infix_input.setText(null);
@@ -217,67 +227,20 @@ public class infixToOther extends AppCompatActivity implements View.OnClickListe
         }
         catch (Exception e)
         {
+            lastConvertedInput = "";
             editText_infix_input.setText(null);
             textView_prefix_output.setText(R.string.dot_line);
             textView_postfix_output.setText(R.string.dot_line);
-            Toast toast_message_infix_to_other = Toast.makeText(infixToOther.this,R.string.invalid_input,Toast.LENGTH_SHORT);
-            toast_message_infix_to_other.setGravity(Gravity.BOTTOM,0,200);
-            toast_message_infix_to_other.show();
+            Toast.makeText(infixToOther.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
             sbss_postfix.setVisibility(View.GONE);
             sbss_prefix.setVisibility(View.GONE);
         }
     }
 
     private void showStepByStepSolution(Class<?> targetActivity) {
-        String infix_input_exp = editText_infix_input.getText().toString();
+        String infix_input_exp = lastConvertedInput.isEmpty() ? editText_infix_input.getText().toString().trim() : lastConvertedInput;
         Intent intent_sbss = new Intent(infixToOther.this, targetActivity);
         intent_sbss.putExtra("tag", infix_input_exp);
-
-        if (mInterstitialAd != null) {
-            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    super.onAdDismissedFullScreenContent();
-                    mInterstitialAd = null;
-                    setAds();
-                    startActivity(intent_sbss);
-                }
-
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    mInterstitialAd = null;
-                    setAds();
-                    startActivity(intent_sbss);
-                }
-            });
-            mInterstitialAd.show(infixToOther.this);
-        } else {
-            startActivity(intent_sbss);
-        }
-    }
-
-
-    public void setAds () {
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        InterstitialAd.load(this,"ca-app-pub-7769405161583944/1245851684", adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        mInterstitialAd = interstitialAd;
-
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-
-                        mInterstitialAd = null;
-                    }
-                });
-
+        AdManager.showInterstitialIfReady(infixToOther.this, () -> startActivity(intent_sbss));
     }
 }

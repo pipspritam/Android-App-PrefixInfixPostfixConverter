@@ -20,150 +20,153 @@
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:textSize="25sp"/>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="match_parent">
-        <ScrollView
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:ignore="UselessParent">
-            <LinearLayout
-                android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:text="@string/prefix"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:textSize="25sp"
+                android:padding="5dp"
+                android:layout_marginBottom="15dp"/>
+            <EditText
+                android:id="@+id/prefix_input"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColorHint="#99ffffff"
+                android:textColor="#ffffff"
+                android:hint="@string/prefix_input"
+                android:gravity="center_horizontal"
+                android:textCursorDrawable="@null"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:singleLine="true"
+                android:padding="5dp"
+                android:layout_marginBottom="15dp"
+                android:digits="0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm()+-*/^$%"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:autofillHints="no"
+                tools:ignore="VisualLintTextFieldSize" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/prefix"
-                    android:textStyle="bold"
-                    android:textColor="#ffffff"
-                    android:textSize="25sp"
-                    android:padding="5dp"
-                    android:layout_marginBottom="15dp"/>
-                <EditText
-                    android:id="@+id/prefix_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:textColorHint="#ffffff"
-                    android:textColor="#ffffff"
-                    android:hint="@string/prefix_input"
-                    android:gravity="center_horizontal"
-                    android:textCursorDrawable="@null"
-                    android:inputType="text"
-                    android:padding="5dp"
-                    android:layout_marginBottom="15dp"
-                    android:digits="0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm()+-*/^$%"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:autofillHints="no"
-                    tools:ignore="VisualLintTextFieldSize" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/button_convert"
-                        android:layout_width="130dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/button_1"
-                        android:padding="10dp"
-                        android:text="@string/convert_button"
-                        android:textAllCaps="false"
-                        android:textColor="#ffffff"
-                        android:textSize="27sp"
-                        android:textStyle="bold"
-                        tools:ignore="ButtonStyle,TextSizeCheck" />
-                    <Button
-                        android:id="@+id/button_reset"
-                        android:layout_width="130dp"
-                        android:background="@drawable/button_1"
-                        android:layout_height="wrap_content"
-                        android:text="@string/reset_button"
-                        android:padding="10dp"
-                        android:textAllCaps="false"
-                        android:textColor="#ffffff"
-                        android:textSize="27sp"
-                        android:textStyle="bold"
-                        tools:ignore="ButtonStyle" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/infix"
-                    android:textSize="25sp"
-                    android:textColor="#ffffff"
-                    android:textStyle="bold"
-                    android:padding="5dp"
-                    android:layout_marginBottom="15dp"/>
-
-                <TextView
-                    android:id="@+id/infix_output"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:minHeight="48dp"
-                    android:padding="5dp"
-                    android:text="@string/dot_line"
-                    android:textColor="#ffffff"
-                    android:textIsSelectable="true"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    tools:ignore="DuplicateSpeakableTextCheck" />
                 <Button
-                    android:layout_width="wrap_content"
+                    android:id="@+id/button_convert"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/step_by_step_solution"
-                    android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:visibility="gone"
-                    android:background="@drawable/button_2"
-                    tools:ignore="ButtonStyle"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/button_1"
+                    android:padding="10dp"
+                    android:text="@string/convert_button"
                     android:textAllCaps="false"
-                    android:layout_marginBottom="15dp"
-                    android:padding="5dp"
-                    android:id="@+id/infix_sbss"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/postfix"
-                    android:textSize="25sp"
+                    android:textColor="#ffffff"
+                    android:textSize="27sp"
                     android:textStyle="bold"
-                    android:textColor="#ffffff"
-                    android:padding="5dp"
-                    android:layout_marginBottom="15dp"/>
-
-                <TextView
-                    android:id="@+id/postfix_output"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:minHeight="48dp"
-                    android:padding="5dp"
-                    android:text="@string/dot_line"
-                    android:textColor="#ffffff"
-                    android:textIsSelectable="true"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    tools:ignore="ButtonStyle,TextSizeCheck" />
                 <Button
-                    android:layout_width="wrap_content"
+                    android:id="@+id/button_reset"
+                    android:layout_width="130dp"
+                    android:background="@drawable/button_1"
                     android:layout_height="wrap_content"
-                    android:text="@string/step_by_step_solution"
-                    android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:visibility="gone"
-                    android:background="@drawable/button_2"
-                    tools:ignore="ButtonStyle"
+                    android:text="@string/reset_button"
+                    android:padding="10dp"
                     android:textAllCaps="false"
-                    android:padding="5dp"
-                    android:id="@+id/postfix_sbss"/>
+                    android:textColor="#ffffff"
+                    android:textSize="27sp"
+                    android:textStyle="bold"
+                    tools:ignore="ButtonStyle" />
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/infix"
+                android:textSize="25sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_marginBottom="15dp"/>
+
+            <TextView
+                android:id="@+id/infix_output"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:minHeight="48dp"
+                android:padding="5dp"
+                android:text="@string/dot_line"
+                android:textColor="#ffffff"
+                android:textIsSelectable="true"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/step_by_step_solution"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:textSize="17sp"
+                android:visibility="gone"
+                android:background="@drawable/button_2"
+                tools:ignore="ButtonStyle"
+                android:textAllCaps="false"
+                android:layout_marginBottom="15dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:id="@+id/infix_sbss"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/postfix"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:padding="5dp"
+                android:layout_marginBottom="15dp"/>
+
+            <TextView
+                android:id="@+id/postfix_output"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:minHeight="48dp"
+                android:padding="5dp"
+                android:text="@string/dot_line"
+                android:textColor="#ffffff"
+                android:textIsSelectable="true"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/step_by_step_solution"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:textSize="17sp"
+                android:visibility="gone"
+                android:background="@drawable/button_2"
+                tools:ignore="ButtonStyle"
+                android:textAllCaps="false"
+                android:layout_marginBottom="15dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:id="@+id/postfix_sbss"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -12,7 +12,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import hotchemi.android.rate.AppRate;
+import android.content.SharedPreferences;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,11 +26,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        AdManager.initialize(this);
+
         View mainLayout = findViewById(R.id.main_layout);
         if (mainLayout != null) {
+            int sidePad = (int) (16 * getResources().getDisplayMetrics().density);
             ViewCompat.setOnApplyWindowInsetsListener(mainLayout, (v, windowInsets) -> {
                 Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
-                v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+                v.setPadding(insets.left + sidePad, insets.top, insets.right + sidePad, insets.bottom);
                 return windowInsets;
             });
         }
@@ -45,12 +52,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        AppRate.with(this)
-                .setInstallDays(1)
-                .setLaunchTimes(3)
-                .setRemindInterval(2)
-                .monitor();
-        AppRate.showRateDialogIfMeetsConditions(this);
+        requestInAppReview();
+    }
+
+    private void requestInAppReview() {
+        SharedPreferences prefs = getSharedPreferences("app_review_prefs", MODE_PRIVATE);
+        int launchCount = prefs.getInt("launch_count", 0) + 1;
+        boolean reviewPrompted = prefs.getBoolean("review_prompted", false);
+        prefs.edit().putInt("launch_count", launchCount).apply();
+
+        if (!reviewPrompted && launchCount >= 3) {
+            ReviewManager manager = ReviewManagerFactory.create(this);
+            Task<ReviewInfo> request = manager.requestReviewFlow();
+            request.addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ReviewInfo reviewInfo = task.getResult();
+                    Task<Void> flow = manager.launchReviewFlow(MainActivity.this, reviewInfo);
+                    flow.addOnCompleteListener(flowTask -> {
+                        prefs.edit().putBoolean("review_prompted", true).apply();
+                    });
+                }
+            });
+        }
     }
     @Override
     public void onClick(View v) {

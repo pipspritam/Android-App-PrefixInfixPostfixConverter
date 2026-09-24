@@ -11,16 +11,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".step_by_step_solution_prefix_to_postfix" />
-        <activity android:name=".step_by_step_solution_prefix_to_infix" />
-        <activity android:name=".step_by_step_solution_postfix_to_prefix" />
-        <activity android:name=".step_by_step_solution_infix_to_prefix" />
-        <activity android:name=".step_by_step_solution_postfix_to_infix" />
-        <activity android:name=".step_by_step_solution_infix_to_postfix" />
-        <activity android:name=".postfixToOther"
-            android:exported="false"/>
-        <activity android:name=".infixToOther" />
-        <activity android:name=".prefixToOther" />
+        <activity
+            android:name=".step_by_step_solution_prefix_to_postfix"
+            android:exported="false" />
+        <activity
+            android:name=".step_by_step_solution_prefix_to_infix"
+            android:exported="false" />
+        <activity
+            android:name=".step_by_step_solution_postfix_to_prefix"
+            android:exported="false" />
+        <activity
+            android:name=".step_by_step_solution_infix_to_prefix"
+            android:exported="false" />
+        <activity
+            android:name=".step_by_step_solution_postfix_to_infix"
+            android:exported="false" />
+        <activity
+            android:name=".step_by_step_solution_infix_to_postfix"
+            android:exported="false" />
+        <activity
+            android:name=".postfixToOther"
+            android:exported="false" />
+        <activity
+            android:name=".infixToOther"
+            android:exported="false" />
+        <activity
+            android:name=".prefixToOther"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.App.Starting"
@@ -30,14 +47,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
 
-        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
-<!--             ca-app-pub-7769405161583944~1507315374 original; -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7769405161583944~1507315374"/>
+            android:value="@string/admob_app_id" />
+        <meta-data
+            android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING"
+            android:value="true" />
     </application>
 </manifest>
