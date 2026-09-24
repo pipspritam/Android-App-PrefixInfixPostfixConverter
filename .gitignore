@@ -1,29 +1,60 @@
-﻿*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
+# IntelliJ / Android Studio module & workspace files
+*.iml
+/.idea/caches/
+/.idea/libraries/
+/.idea/modules/
+/.idea/shelf/
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+/.idea/gradle.xml
+/.idea/misc.xml
+/.idea/jarRepositories.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/appInsightsSettings.xml
+/.idea/AndroidProjectSystem.xml
+/.idea/migrations.xml
+/.idea/compiler.xml
 
-# Built application files
+# Gradle & Kotlin build caches
+.gradle/
+.kotlin/
+**/build/
+/local.properties
+
+# Signing keys & credentials (NEVER commit to Git)
+*.jks
+*.keystore
+keystore.properties
+key.properties
+
+# Android Studio release/debug export folders & metadata
+app/release/
+app/debug/
+output-metadata.json
+
+# Built application binaries
 *.apk
 *.aar
 *.ap_
 *.aab
 
-# Files for the ART/Dalvik VM
+# ART/Dalvik & Java bytecode
 *.dex
-
-# Java class files
 *.class
 
-# Log files
+# Native build & profiling
+/captures/
+.externalNativeBuild/
+.cxx/
+.navigation/
+*.hprof
+
+# Logs & OS metadata
 *.log
+.DS_Store
+Thumbs.db
+Desktop.ini
+
